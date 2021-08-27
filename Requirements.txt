@@ -1,0 +1,12 @@
+google-cloud-firestore
+google-cloud-storage
+requests
+numpy
+pandas
+pytz
+netCDF4
+xarray
+pykrige
+matplotlib
+cython
+scipy
