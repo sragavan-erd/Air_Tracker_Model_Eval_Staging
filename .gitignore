@@ -22,3 +22,7 @@ dmypy.json
 # MacOS configuration
 .DS_Store
 *.icloud
+
+# Exported artifacts
+hrrr_wind.nc
+export

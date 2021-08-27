@@ -10,3 +10,5 @@ pykrige
 matplotlib
 cython
 scipy
+wrf-python
+black

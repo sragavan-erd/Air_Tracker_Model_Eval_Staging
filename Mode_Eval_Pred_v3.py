@@ -1,9 +1,3 @@
-#####################
-# LIBRARY IMPORTS #
-#####################
-
-# If any packages are missing, install the packages in the Requirements.txt file#
-
 import json
 import os
 import subprocess
@@ -15,35 +9,8 @@ import pandas as pd
 import xarray as xr
 from pytz import timezone
 
-#####################
-# FUNCTION IMPORTS #
-#####################
-
-sys.path.append(
-    os.path.realpath(os.path.dirname("/share/air-tracker-edf/src/hrrr-uncertainty/"))
-)
-
-from google.cloud import firestore
-
 from GoogleCloudStorage import GoogleCloudStorageBucket
 from MesoWest_BB import get_mesowest_radius  # Importing the MesoWest API python code.
-
-db = firestore.Client()
-
-# collection_ref = db.collection(os.getenv('FIRESTORE_COLLECTION'))
-
-# collection_ref2 = db.collection(os.getenv('FIRESTORE_COLLECTION2'))
-
-# append search path to raster tools in STILT directory
-sys.path.append(
-    os.path.realpath(
-        os.path.join(
-            os.path.dirname("/share/air-tracker-edf/src/hrrr-uncertainty/"),
-            "../stilt/stilt",
-        )
-    )
-)
-from raster import Raster
 
 # from mesowest import get_mesowest_ts, load_json
 # from extras import dist, find_nearest
