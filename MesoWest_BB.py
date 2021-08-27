@@ -1,13 +1,13 @@
-import numpy as np
-import requests
-import pandas as pd
-from pandas import Grouper
-import pytz
-from math import radians, cos, sin, asin, sqrt
-
-from datetime import datetime, timedelta
-
+import os
 import sys
+from datetime import datetime, timedelta
+from math import asin, cos, radians, sin, sqrt
+
+import numpy as np
+import pandas as pd
+import pytz
+import requests
+from pandas import Grouper
 
 default_vars = 'altimeter,' \
              + 'pressure,' \
@@ -31,7 +31,9 @@ carslaw_vars = 'relative_humidity,' \
 
 """TAMMY'S API TOKEN!!! If using a lot, please request your own.
 Get your own token here: https://developers.synopticdata.com/"""
-#MW_token = ''
+MESOWEST_TOKEN = os.getenv("MESOWEST_TOKEN")
+if not MESOWEST_TOKEN:
+    raise EnvironmentError("MESOWEST_TOKEN environment variable not found.")
 
 
 def dist(lat1, long1, lat2, long2):
@@ -96,7 +98,7 @@ def get_mesowest_ts(stationID, sDATE, eDATE,
 
     ## Build the MesoWest API request URL
     URL = 'http://api.mesowest.net/v2/stations/timeseries?' \
-        + '&token=' + MW_token \
+        + '&token=' + MESOWEST_TOKEN \
         + '&stid=' + stationID \
         + '&start=' + sDATE.strftime("%Y%m%d%H%M") \
         + '&end=' + eDATE.strftime("%Y%m%d%H%M") \
@@ -211,7 +213,7 @@ def get_mesowest_radius(DATE, location,
                     print("             Refine your request using the 'extra=&...' argument")
             return 'ERROR'
         URL = 'http://api.mesowest.net/v2/stations/nearesttime?' \
-            + '&token=' + MW_token \
+            + '&token=' + MESOWEST_TOKEN \
             + '&attime=' + DATE.strftime("%Y%m%d%H%M") \
             + '&within=' + str(within) \
             + '&obtimezone=' + 'UTC' \
@@ -219,7 +221,7 @@ def get_mesowest_radius(DATE, location,
             + extra
     else:
         URL = 'http://api.mesowest.net/v2/stations/nearesttime?' \
-            + '&token=' + MW_token \
+            + '&token=' + MESOWEST_TOKEN \
             + '&attime=' + DATE.strftime("%Y%m%d%H%M") \
             + '&within=' + str(within) \
             + '&radius=' + '%s,%s' % (location, radius) \
