@@ -4,27 +4,16 @@
 
 #If any packages are missing, install the packages in the Requirements.txt file#
 
-import os 
-import re 
-from datetime import datetime, timedelta 
-import subprocess 
-import warnings
-import pandas as pd
-import numpy as np
-import xarray as xr 
-import pytz 
-from pytz import timezone
-from math import radians, cos, sin, asin, sqrt
-import matplotlib.pyplot as plt
-import netCDF4 as nc 
-from netCDF4 import Dataset
-import sys
-import base64
-import copy
-import io
-import tempfile
-import textwrap
 import json
+import os
+import subprocess
+import sys
+from datetime import datetime, timedelta
+
+import numpy as np
+import pandas as pd
+import xarray as xr
+from pytz import timezone
 
 #####################
 # FUNCTION IMPORTS #
@@ -34,9 +23,11 @@ sys.path.append(
     os.path.realpath(
         os.path.dirname('/share/air-tracker-edf/src/hrrr-uncertainty/')))  
 
-from MesoWest_BB import get_mesowest_radius  #Importing the MesoWest API python code.
+from google.cloud import firestore
+
 from GoogleCloudStorage import GoogleCloudStorageBucket
-from google.cloud import firestore 
+from MesoWest_BB import \
+    get_mesowest_radius  # Importing the MesoWest API python code.
 
 #db = firestore.Client()
 
@@ -50,7 +41,7 @@ from google.cloud import firestore
 sys.path.append(
     os.path.realpath(
         os.path.join(os.path.dirname('/share/air-tracker-edf/src/hrrr-uncertainty/'), '../stilt/stilt')))  
-from raster import Raster 
+from raster import Raster
 
 #####################
 # MESOWEST API PULL #
@@ -97,7 +88,6 @@ hrrr_endhour = hrrr_hour + 5
 
 # filename = f'-112.6_-111.4_40.0_41.3/{hrrr_time}_{hrrr_hour:02}-{hrrr_endhour:02}_hrrr'
 filename = f'-112.6_-111.4_40.0_41.3/{dat}/hysplit.t{hrrr_hour:02}z.hrrrf'
-
 
 
 bucket.download(filename, '/tmp/hrrr') #This is used to pull the ARL HRRR data from the GCS bucket

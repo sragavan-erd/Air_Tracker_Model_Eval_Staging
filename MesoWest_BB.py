@@ -1,13 +1,9 @@
 import os
-import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from math import asin, cos, radians, sin, sqrt
 
 import numpy as np
-import pandas as pd
-import pytz
 import requests
-from pandas import Grouper
 
 default_vars = 'altimeter,' \
              + 'pressure,' \
