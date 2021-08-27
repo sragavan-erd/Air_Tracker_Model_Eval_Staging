@@ -47,7 +47,7 @@ Mesowest_BB.py has a function defined that allows an input of a central co-ordin
 Currently, the central co-ordinates for Salt Lake City, Utah (46.65,-112.0) is hardcoded in the function call. In addition to these coordinates, we pass a radius of 20 miles, the datetime, variables that need to be pulled (wind speed and wind direction).
  
 HRRR Data Pull
-The HRRR data uploaded to the GCS Bucket is localized for the Mountain Timezone. Therefore, we create an mDATE variable which converts the cDATE to MDT.
+The HRRR data uploaded to the GCS Bucket is also in UTC. Therefore, we create an mDATE variable which is just a copy of cDATE.
  
 In order to download the ARL Files from the GCS bucket, we establish a connection. The variable dat, dat2, hrrr_time, hrrr_hour, hrrr_endhour are created to be used in creating a dynamic file name based on the datetime. This filename reflects the naming convention of the ARL files stores in the GCS Buckets.
  
