@@ -1,3 +1,9 @@
+"""
+This doesn't currently run off the shared VM.
+
+This is intended to source meteorology from the CONUS HRRR files. We should probably
+iterate on Model_Eval_v2.py instead of maintaining both of these.
+"""
 import json
 import os
 import subprocess
